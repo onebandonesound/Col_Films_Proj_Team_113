@@ -1,11 +1,37 @@
-{% extends "base.html" %}
+{% extends "core/base.html" %}
 
-{% block title %}{% endblock title %}
+{% block title %}Home{% endblock title %}
 
 {% block content %}
+<style>
+    .vidhut__button-primary {
+    background-color: #2B333A;
+    margin-right: 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 8px 16px;
+    font-family: Montserrat;
+    color: white;
+}
 
-{% include 'partials/_alerts.html' %}
+.vidhut__button-primary:hover {
+    background-color: #BCE6AD;
+    color: #000A12;
+}
+</style>
 
-Homepage
+<div class="row mb-3">
+    {% for c in categories %}
+    <div class="col-lg-1 me-2">
+        <a href="{# c.get_absolute_url #}" class="btn vidhut__button-primary mb-1">{{ c.name }}</a>
+    </div>
+    {% endfor %}
+</div>
 
-{% endblock content %}
+
+{% for video in videos %}
+<div class="col-md-3">
+    {% include 'partials/_video_card.html' %}
+</div>
+{% endfor %}
+{% endblock %}

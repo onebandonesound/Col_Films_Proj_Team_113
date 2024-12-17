@@ -1,0 +1,125 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+{% load humanize %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tour VidHut</title>
+    <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar vidhut__bg-grey navbar-expand-lg">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand me-5" href="{% url 'core:home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="VidHut">
+            </a>
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% url 'core:home' as home_url %}{% if request.get_full_path == home_url %}vidhut__nav-active{% else %}vidhut__text-white{% endif %} me-4"
+                            href="{% url 'core:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 vidhut__text-white" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 vidhut__text-white" href="#howto">How To</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 vidhut__text-white" href="#categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 vidhut__text-white" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 {% url 'core:tour' as tour_url %}{% if request.get_full_path == tour_url %}vidhut__nav-active{% else %}vidhut__text-white{% endif %}"
+                            href="{% url 'core:tour' %}">Tour hut</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav ms-auto">
+                    <a href="{% url 'accounts:signup_choice' %}" class="btn vidhut__button-primary mb-1">Sign up</a>
+                    <a href="{% url 'accounts:login' %}" class="btn vidhut__button-secondary mb-1 me-lg-0">Log
+                        in</a>
+                </div>
+            </div>
+        </div>
+    </nav> <!-- End Navbar -->
+
+    <!-- Categories -->
+    <section class="vidhut__bg-dark" id="categories">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="section-title">Trending Videos</h2>
+                </div>
+            </div>
+
+            <div class="row">
+
+                {% for video in videos %}
+                <div class="col-md-3">
+                    {% include 'partials/_video_card.html' %}
+                </div>
+                {% endfor %}
+                
+                <!-- <a class="mt-4 btn see-more" href="javascript:void(0)">Load More</a> -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="vidhut__bg-grey">
+        <div class="container py-4 px-4">
+            <div class="row">
+                <div class="col-lg-6 col-md col-sm col-12 mb-5">
+                    <img src="{% static 'images/logo.png' %}" alt="logo">
+                    <h4 class="ms-3 d-inline vidhut__text-white">Vidhut Inc. 2022</h4>
+                </div>
+                <div class="col-lg-2 col-md col-sm-4 col-12">
+                    <h5 class="vidhut__text-white fw-bold mb-4">Explore</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="FAQs">FAQs</a></li>
+                        <li><a href="#only">Only on Vidhut</a></li>
+                        <li><a href="#explore">Explore contents</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md col-sm-4 col-12">
+                    <h5 class="vidhut__text-white fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#terms">Terms of use</a></li>
+                        <li><a href="Howto">How to upload</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md col-sm-4 col-12">
+                    <h5 class="vidhut__text-white fw-bold mb-4">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact us</a></li>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#mediacenter">Media center</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'scripts/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'scripts/app.js' %}"></script>
+</body>
+
+</html>
